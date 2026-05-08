@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Meridian Academy | Innovation in Education</title>
+    <style>
+        :root {
+            --primary-blue: #0f172a;
+            --electric-blue: #3b82f6;
+            --stem-green: #10b981;
+            --text-slate: #475569;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-slate);
+            background-color: #f8fafc;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary-blue);
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80');
+            background-size: cover;
+            color: var(--white);
+            padding: 120px 5% 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .section { padding: 80px 5%; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-bottom: 4px solid var(--electric-blue);
+        }
+
+        .card h3 { color: var(--primary-blue); margin-bottom: 1rem; }
+
+        /* STEM Lab Highlight */
+        .stem-highlight {
+            background: var(--primary-blue);
+            color: var(--white);
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stem-content { flex: 1; min-width: 300px; }
+        .stem-tag {
+            background: var(--stem-green);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Tech/AI Section */
+        .tech-integration {
+            background: #f1f5f9;
+            border-left: 8px solid var(--electric-blue);
+            padding: 3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        .contact-box {
+            font-size: 1.5rem;
+            margin: 2rem 0;
+            color: var(--electric-blue);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">THE MERIDIAN ACADEMY</div>
+        <div class="nav-links">
+            <a href="#streams">Streams</a>
+            <a href="#stem">STEM Lab</a>
+            <a href="#ai">AI Integration</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Shaping Future Thinkers in Kangra</h1>
+        <p>A premier tuition center for Class 6 to 10+2, blending rigorous academic excellence with hands-on technical exploration.</p>
+        <div class="contact-box" style="color:white; font-size: 1.2rem;">Inauguration Coming Soon</div>
+    </header>
+
+    <section class="section" id="streams">
+        <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: var(--primary-blue);">Academic Streams</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Science (Medical & Non-Med)</h3>
+                <p>Advanced coaching for Physics, Chemistry, Biology, and Mathematics for 10+1 and 10+2 levels.</p>
+            </div>
+            <div class="card">
+                <h3>Commerce & Humanities</h3>
+                <p>Expert guidance in Economics, Accountancy, Business Studies, and Political Science.</p>
+            </div>
+            <div class="card">
+                <h3>Foundation (6th - 10th)</h3>
+                <p>Building strong analytical and conceptual foundations across all core subjects.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="stem">
+        <div class="stem-highlight">
+            <div class="stem-content">
+                <span class="stem-tag">UNIQUE FEATURE</span>
+                <h2 style="font-size: 2.5rem; margin: 1rem 0;">The STEM Innovation Lab</h2>
+                <p>We believe in learning by doing. Our academy features a dedicated STEM lab where students from all grades can explore robotics, scientific experiments, and creative engineering projects alongside their conventional studies.</p>
+            </div>
+            <div style="flex: 1; text-align: center;">
+                <div style="font-size: 5rem;">🔬🧪🤖</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="ai">
+        <div class="tech-integration">
+            <h2 style="color: var(--primary-blue); margin-bottom: 1rem;">Future-Ready Curriculum: AI & ML</h2>
+            <p>Led by an expert with deep research experience in **Artificial Intelligence and Machine Learning**, we integrate high-level technical insights into our teaching. Students gain exposure to the technologies of tomorrow, ensuring they stay ahead in a rapidly evolving world.</p>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>Join The Meridian Academy</h2>
+        <p>Kangra District, Himachal Pradesh</p>
+        <div class="contact-box">+91-7018305080</div>
+        <p style="opacity: 0.6; font-size: 0.8rem; margin-top: 2rem;">&copy; 2024 The Meridian Academy. Professional Research & Teaching Excellence.</p>
+    </footer>
+
+</body>
+</html>
