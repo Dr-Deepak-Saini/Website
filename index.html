@@ -4,206 +4,1104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Meridian Academy | Innovation in Education</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #0f172a;
-            --electric-blue: #3b82f6;
-            --stem-green: #10b981;
-            --text-slate: #475569;
-            --white: #ffffff;
+            --ink: #0a0e1a;
+            --deep: #111827;
+            --gold: #d4a853;
+            --gold-light: #f0c97a;
+            --teal: #0ea5a0;
+            --teal-light: #2dd4cc;
+            --slate: #94a3b8;
+            --off-white: #f7f6f2;
+            --card-bg: #161d2e;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', system-ui, sans-serif;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            line-height: 1.6;
-            color: var(--text-slate);
-            background-color: #f8fafc;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--ink);
+            color: var(--off-white);
+            overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* ---- NOISE TEXTURE OVERLAY ---- */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* ---- NAV ---- */
         nav {
-            background: var(--primary-blue);
-            padding: 1.5rem 5%;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.2rem 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: rgba(10, 14, 26, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(212, 168, 83, 0.15);
         }
 
         .logo {
-            color: var(--white);
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -1px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--off-white);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
+        .logo span { color: var(--gold); }
+
+        .nav-links { display: flex; gap: 2.5rem; }
         .nav-links a {
-            color: var(--white);
+            color: var(--slate);
             text-decoration: none;
-            margin-left: 2rem;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* ---- HERO ---- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 120px 6% 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(14, 165, 160, 0.12) 0%, transparent 60%),
+                        radial-gradient(ellipse 50% 80% at 10% 80%, rgba(212, 168, 83, 0.08) 0%, transparent 50%),
+                        var(--ink);
+        }
+
+        /* Geometric grid lines */
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(212,168,83,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212,168,83,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+        .hero-eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--teal);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background: var(--teal);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.08;
+            color: var(--off-white);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--gold);
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--slate);
+            line-height: 1.8;
+            max-width: 560px;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.5rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .badge-gold {
+            background: rgba(212,168,83,0.15);
+            border: 1px solid rgba(212,168,83,0.4);
+            color: var(--gold-light);
+        }
+        .badge-teal {
+            background: rgba(14,165,160,0.15);
+            border: 1px solid rgba(14,165,160,0.4);
+            color: var(--teal-light);
+        }
+
+        /* floating orb */
+        .hero-orb {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 40%, rgba(14,165,160,0.25), rgba(212,168,83,0.1) 50%, transparent 70%);
+            border: 1px solid rgba(212,168,83,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-orb::before {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            border-radius: 50%;
+            border: 1px dashed rgba(212,168,83,0.15);
+            animation: spin 30s linear infinite;
+        }
+
+        .hero-orb-inner {
+            font-size: 5rem;
+            filter: drop-shadow(0 0 30px rgba(14,165,160,0.5));
+            animation: float 4s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) translateX(0); }
+            50% { transform: translateY(calc(-50% - 20px)) translateX(10px); }
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ---- SECTION BASE ---- */
+        section { padding: 100px 6%; }
+
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--teal);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 30px;
+            height: 1px;
+            background: var(--teal);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--off-white);
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+
+        .section-title span { color: var(--gold); }
+
+        /* ---- FACULTY PROFILE ---- */
+        #faculty {
+            background: linear-gradient(135deg, var(--deep) 0%, #0d1525 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #faculty::before {
+            content: '';
+            position: absolute;
+            top: -100px; right: -100px;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,168,83,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .profile-wrapper {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 5rem;
+            align-items: start;
+            margin-top: 4rem;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid rgba(212,168,83,0.2);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
+        }
+
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--teal), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--ink);
+            border: 3px solid rgba(212,168,83,0.3);
+            position: relative;
+        }
+
+        .avatar::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1px dashed rgba(212,168,83,0.4);
+            animation: spin 12s linear infinite;
+        }
+
+        .profile-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--off-white);
+            margin-bottom: 0.3rem;
+        }
+
+        .profile-title {
+            font-size: 0.82rem;
+            color: var(--teal-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+        }
+
+        .cred-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 1.8rem;
+            text-align: left;
+        }
+
+        .cred-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.85rem;
+            color: var(--slate);
+            padding: 0.5rem 0.8rem;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .cred-item .icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(212,168,83,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .stat-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .stat-box {
+            background: rgba(14,165,160,0.08);
+            border: 1px solid rgba(14,165,160,0.2);
+            border-radius: 12px;
+            padding: 0.8rem;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--teal-light);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--slate);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.2rem;
+        }
+
+        /* Profile Right Side */
+        .profile-details { padding-top: 0.5rem; }
+
+        .profile-bio {
+            font-size: 1.05rem;
+            color: var(--slate);
+            line-height: 1.9;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .profile-bio strong {
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 4px;
+            bottom: 4px;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--teal), var(--gold), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .timeline-item:last-child { border-bottom: none; margin-bottom: 0; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.7rem;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid var(--ink);
+            box-shadow: 0 0 10px rgba(212,168,83,0.5);
+        }
+
+        .timeline-period {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--teal);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-role {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--off-white);
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-org {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--slate);
+            margin-top: 0.4rem;
+            line-height: 1.6;
+        }
+
+        /* ---- STREAMS ---- */
+        #streams { background: var(--ink); }
+
+        .streams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+        }
+
+        .stream-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            cursor: default;
+        }
+
+        .stream-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(212,168,83,0.3);
+        }
+
+        .stream-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal), var(--gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .stream-card:hover::after { transform: scaleX(1); }
+
+        .stream-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .stream-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--off-white);
+            margin-bottom: 0.8rem;
+        }
+
+        .stream-card p {
             font-size: 0.9rem;
+            color: var(--slate);
+            line-height: 1.7;
+        }
+
+        /* ---- STEM ---- */
+        #stem {
+            background: linear-gradient(135deg, #080d1a 0%, #0d1a1a 100%);
+            position: relative;
+        }
+
+        .stem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3.5rem;
+        }
+
+        .stem-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .stem-feat {
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            padding: 1.2rem;
+            border-radius: 14px;
+            border: 1px solid rgba(14,165,160,0.1);
+            background: rgba(14,165,160,0.04);
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .stem-feat:hover {
+            border-color: rgba(14,165,160,0.3);
+            background: rgba(14,165,160,0.08);
+        }
+
+        .stem-feat-icon {
+            font-size: 1.5rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(14,165,160,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .stem-feat h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--off-white);
+            margin-bottom: 0.3rem;
+        }
+
+        .stem-feat p {
+            font-size: 0.82rem;
+            color: var(--slate);
+            line-height: 1.6;
+        }
+
+        .stem-visual {
+            position: relative;
+            height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stem-circle {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 40%, rgba(14,165,160,0.3), rgba(212,168,83,0.1) 50%, transparent);
+            border: 1px solid rgba(14,165,160,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            animation: float2 5s ease-in-out infinite;
+        }
+
+        .stem-circle::before, .stem-circle::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            border: 1px dashed rgba(14,165,160,0.2);
+        }
+        .stem-circle::before { inset: -30px; animation: spin 20s linear infinite; }
+        .stem-circle::after  { inset: -60px; animation: spin 35s linear infinite reverse; }
+
+        .orbit-dot {
+            position: absolute;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* ---- AI SECTION ---- */
+        #ai {
+            background: var(--ink);
+        }
+
+        .ai-box {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 4rem;
+            border: 1px solid rgba(212,168,83,0.15);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-box::before {
+            content: '';
+            position: absolute;
+            top: -80px; right: -80px;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,168,83,0.08) 0%, transparent 70%);
+        }
+
+        .ai-text p {
+            font-size: 1rem;
+            color: var(--slate);
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-text p strong { color: var(--gold-light); font-weight: 600; }
+
+        .ai-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .chip {
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            background: rgba(212,168,83,0.1);
+            border: 1px solid rgba(212,168,83,0.25);
+            color: var(--gold-light);
+        }
+
+        .ai-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .ai-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .ai-card:hover { transform: translateY(-4px); border-color: rgba(14,165,160,0.3); }
+        .ai-card:first-child { grid-column: span 2; }
+
+        .ai-card .big-icon { font-size: 2.2rem; margin-bottom: 0.6rem; }
+
+        .ai-card h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--off-white);
+            margin-bottom: 0.3rem;
+        }
+
+        .ai-card p { font-size: 0.75rem; color: var(--slate); line-height: 1.5; }
+
+        /* ---- FOOTER ---- */
+        footer {
+            background: var(--deep);
+            border-top: 1px solid rgba(212,168,83,0.15);
+            padding: 6rem 6% 3rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--off-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-logo span { color: var(--gold); }
+
+        .footer-tagline {
+            font-size: 0.85rem;
+            color: var(--slate);
+            letter-spacing: 1px;
+            margin-bottom: 3rem;
+        }
+
+        .contact-strip {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin: 2.5rem 0;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(212,168,83,0.1);
+            border: 1px solid rgba(212,168,83,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .contact-text { text-align: left; }
+
+        .contact-label {
+            font-size: 0.68rem;
+            color: var(--slate);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80');
-            background-size: cover;
-            color: var(--white);
-            padding: 120px 5% 80px;
-            text-align: center;
+        .contact-value {
+            font-size: 0.92rem;
+            color: var(--off-white);
+            font-weight: 500;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.06);
+            margin: 3rem 0;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
+        .footer-bottom {
+            font-size: 0.78rem;
+            color: rgba(148,163,184,0.5);
+            letter-spacing: 0.5px;
         }
 
-        /* Features Section */
-        .section { padding: 80px 5%; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 900px) {
+            .profile-wrapper { grid-template-columns: 1fr; }
+            .stem-grid { grid-template-columns: 1fr; }
+            .ai-box { grid-template-columns: 1fr; }
+            .hero-orb { display: none; }
         }
 
-        .card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            border-bottom: 4px solid var(--electric-blue);
-        }
-
-        .card h3 { color: var(--primary-blue); margin-bottom: 1rem; }
-
-        /* STEM Lab Highlight */
-        .stem-highlight {
-            background: var(--primary-blue);
-            color: var(--white);
-            border-radius: 20px;
-            padding: 4rem;
-            margin: 2rem 0;
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .stem-content { flex: 1; min-width: 300px; }
-        .stem-tag {
-            background: var(--stem-green);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        /* Tech/AI Section */
-        .tech-integration {
-            background: #f1f5f9;
-            border-left: 8px solid var(--electric-blue);
-            padding: 3rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-blue);
-            color: var(--white);
-            padding: 4rem 5% 2rem;
-            text-align: center;
-        }
-
-        .contact-box {
-            font-size: 1.5rem;
-            margin: 2rem 0;
-            color: var(white);
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+        @media (max-width: 640px) {
+            nav { padding: 1rem 4%; }
             .nav-links { display: none; }
+            section { padding: 70px 4%; }
+            .profile-card { padding: 2rem; }
         }
+
+        /* ---- FADE IN ANIMATION ---- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays */
+        .fade-in:nth-child(2) { transition-delay: 0.1s; }
+        .fade-in:nth-child(3) { transition-delay: 0.2s; }
+        .fade-in:nth-child(4) { transition-delay: 0.3s; }
     </style>
 </head>
 <body>
 
+    <!-- NAV -->
     <nav>
-        <div class="logo">THE MERIDIAN ACADEMY</div>
+        <div class="logo">The <span>Meridian</span> Academy</div>
         <div class="nav-links">
+            <a href="#faculty">Faculty</a>
             <a href="#streams">Streams</a>
             <a href="#stem">STEM Lab</a>
-            <a href="#ai">AI Integration</a>
+            <a href="#ai">AI & ML</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
+    <!-- HERO -->
     <header class="hero">
-        <h1>Shaping Future Thinkers in Kangra</h1>
-        <p>A premier tuition center for Class 6 to 10+2, blending rigorous academic excellence with hands-on technical exploration.</p>
-        <div class="contact-box" style="color:white; font-size: 1.2rem;">Inauguration Coming Soon</div>
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">District Kangra, Himachal Pradesh</div>
+            <h1>Shaping <em>Future</em><br>Thinkers<br>of Tomorrow</h1>
+            <p>A premier tuition centre for Classes 6 to 10+2, blending rigorous academic excellence with hands-on technical exploration — led by a PhD researcher in AI & ML.</p>
+            <div class="badge-row">
+                <span class="badge badge-gold">🎓 Class 6 – 10+2</span>
+                <span class="badge badge-teal">🔬 STEM Innovation Lab</span>
+                <span class="badge badge-gold">🤖 AI & ML Exposure</span>
+                <span class="badge badge-teal">⚡ Inauguration Coming Soon</span>
+            </div>
+        </div>
+        <div class="hero-orb">
+            <div class="hero-orb-inner">🎓</div>
+        </div>
     </header>
 
-    <section class="section" id="streams">
-        <h2 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: var(--primary-blue);">Academic Streams</h2>
-        <div class="grid">
-            <div class="card">
+    <!-- FACULTY PROFILE -->
+    <section id="faculty">
+        <div class="section-label">Meet the Director</div>
+        <h2 class="section-title">Guided by <span>Research & Excellence</span></h2>
+
+        <div class="profile-wrapper">
+            <!-- Card -->
+            <div class="profile-card fade-in">
+                <div class="avatar">DS</div>
+                <div class="profile-name">Dr. Deepak Saini</div>
+                <div class="profile-title">Ph.D. · Founder & Director</div>
+
+                <div class="cred-list">
+                    <div class="cred-item">
+                        <div class="icon">🎓</div>
+                        Ph.D. in Computer Science
+                    </div>
+                    <div class="cred-item">
+                        <div class="icon">📘</div>
+                        M.Tech in Computer Science
+                    </div>
+                    <div class="cred-item">
+                        <div class="icon">📗</div>
+                        B.Tech in Computer Science
+                    </div>
+                    <div class="cred-item">
+                        <div class="icon">🏅</div>
+                        GATE Qualified
+                    </div>
+                    <div class="cred-item">
+                        <div class="icon">🏅</div>
+                        NET Qualified
+                    </div>
+                </div>
+
+                <div class="stat-row">
+                    <div class="stat-box">
+                        <div class="stat-num">7+</div>
+                        <div class="stat-label">Years Exp.</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-num">3</div>
+                        <div class="stat-label">Institutions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Details -->
+            <div class="profile-details fade-in">
+                <p class="profile-bio">
+                    Dr. Deepak Saini brings <strong>7+ years of combined professional and academic experience</strong> to The Meridian Academy. 
+                    After earning his B.Tech and M.Tech, he launched his career as a <strong>Software Engineer at Wipro Infotech</strong>, 
+                    gaining 2 years of industry experience in real-world technology solutions. He then pursued his passion for 
+                    academia and research, going on to complete his <strong>Ph.D. in Computer Science</strong> with deep specialisation 
+                    in <strong>Artificial Intelligence and Machine Learning</strong>. He has since served as an <strong>Assistant Professor</strong> 
+                    at two prestigious universities, bringing both industry pragmatism and research depth to every classroom.
+                </p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-period">Industry</div>
+                        <div class="timeline-role">Software Engineer</div>
+                        <div class="timeline-org">Wipro Infotech</div>
+                        <div class="timeline-desc">2 years of professional software engineering experience at one of India's leading IT companies, working on enterprise-grade technology solutions.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-period">Academia</div>
+                        <div class="timeline-role">Assistant Professor</div>
+                        <div class="timeline-org">Thapar University</div>
+                        <div class="timeline-desc">Teaching and mentoring undergraduate and postgraduate students in Computer Science, AI, and Machine Learning at a premier institute of national repute.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-period">Academia</div>
+                        <div class="timeline-role">Assistant Professor</div>
+                        <div class="timeline-org">Chitkara University</div>
+                        <div class="timeline-desc">Continued academic journey at Chitkara University, integrating research-led pedagogy with practical, industry-aligned curriculum.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-period">Present</div>
+                        <div class="timeline-role">Founder & Director</div>
+                        <div class="timeline-org">The Meridian Academy, Kangra</div>
+                        <div class="timeline-desc">Bringing the best of industry experience and academic excellence back to Himachal Pradesh to create future-ready learners.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMS -->
+    <section id="streams">
+        <div class="section-label">What We Teach</div>
+        <h2 class="section-title">Academic <span>Streams</span></h2>
+        <div class="streams-grid">
+            <div class="stream-card fade-in">
+                <div class="stream-icon">🔬</div>
                 <h3>Science (Medical & Non-Med)</h3>
-                <p>Advanced coaching for Physics, Chemistry, Biology, and Mathematics for 10+1 and 10+2 levels.</p>
+                <p>Advanced coaching for Physics, Chemistry, Biology, and Mathematics for classes 6–9, with dedicated batches for 10+1 and 10+2. Board and competitive exam preparation included.</p>
             </div>
-            <div class="card">
+            <div class="stream-card fade-in">
+                <div class="stream-icon">📊</div>
                 <h3>Commerce & Humanities</h3>
-                <p>Expert guidance in Economics, Accountancy, Business Studies, and Political Science.</p>
+                <p>Expert guidance in Economics, Accountancy, Business Studies, and Political Science. Concept-first teaching that builds lasting analytical ability.</p>
             </div>
-            <div class="card">
-                <h3>Foundation (6th - 10th)</h3>
-                <p>Building strong analytical and conceptual foundations across all core subjects.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="stem">
-        <div class="stem-highlight">
-            <div class="stem-content">
-                <span class="stem-tag">UNIQUE FEATURE</span>
-                <h2 style="font-size: 2.5rem; margin: 1rem 0;">The STEM Innovation Lab</h2>
-                <p>We believe in learning by doing. Our academy features a dedicated STEM lab where students from all grades can explore robotics, scientific experiments, and creative engineering projects alongside their conventional studies.</p>
-            </div>
-            <div style="flex: 1; text-align: center;">
-                <div style="font-size: 5rem;">🔬🧪🤖</div>
+            <div class="stream-card fade-in">
+                <div class="stream-icon">📐</div>
+                <h3>Foundation (Classes 6–10)</h3>
+                <p>Strong conceptual and analytical foundations across all core subjects. Critical thinking, problem-solving, and exam skills developed from an early age.</p>
             </div>
         </div>
     </section>
 
-    <section class="section" id="ai">
-        <div class="tech-integration">
-            <h2 style="color: var(--primary-blue); margin-bottom: 1rem;">Future-Ready Curriculum: AI & ML</h2>
-            <p>Led by an expert with deep research experience in **Artificial Intelligence and Machine Learning**, we integrate high-level technical insights into our teaching. Students gain exposure to the technologies of tomorrow, ensuring they stay ahead in a rapidly evolving world.</p>
+    <!-- STEM -->
+    <section id="stem">
+        <div class="section-label">Unique Feature</div>
+        <h2 class="section-title">The STEM <span>Innovation Lab</span></h2>
+        <div class="stem-grid">
+            <div class="stem-features fade-in">
+                <div class="stem-feat">
+                    <div class="stem-feat-icon">🤖</div>
+                    <div>
+                        <h4>Robotics & Automation</h4>
+                        <p>Students build and programme real robots, gaining hands-on experience with electronics and logic from a young age.</p>
+                    </div>
+                </div>
+                <div class="stem-feat">
+                    <div class="stem-feat-icon">🧪</div>
+                    <div>
+                        <h4>Scientific Experiments</h4>
+                        <p>A fully equipped lab for students to conduct experiments that reinforce and go beyond their classroom curriculum.</p>
+                    </div>
+                </div>
+                <div class="stem-feat">
+                    <div class="stem-feat-icon">⚙️</div>
+                    <div>
+                        <h4>Creative Engineering Projects</h4>
+                        <p>Cross-disciplinary projects where students design, prototype, and present real solutions to real problems.</p>
+                    </div>
+                </div>
+                <div class="stem-feat">
+                    <div class="stem-feat-icon">💡</div>
+                    <div>
+                        <h4>Innovation Challenges</h4>
+                        <p>Regular workshops and hackathon-style events to nurture entrepreneurial thinking and creative problem-solving skills.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="stem-visual fade-in">
+                <div class="stem-circle">🔬
+                    <div class="orbit-dot" style="top:10%; left:50%; transform:translateX(-50%)"></div>
+                    <div class="orbit-dot" style="bottom:5%; right:20%;"></div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- AI SECTION -->
+    <section id="ai">
+        <div class="section-label">Future-Ready Curriculum</div>
+        <h2 class="section-title">AI & Machine Learning <span>Exposure</span></h2>
+        <div class="ai-box fade-in">
+            <div class="ai-text">
+                <p>
+                    Led by <strong>Dr. Deepak Saini</strong>, whose doctoral and post-doctoral work centres on Artificial Intelligence and Machine Learning, our academy gives students a rare early exposure to the technologies that are reshaping the world.
+                </p>
+                <p>
+                    Unlike standard tuition centres, our students learn <strong>not just the "what" but the "why"</strong> — the intuitions behind algorithms, the logic of data, and the real-world power of AI-driven thinking — well before university.
+                </p>
+                <div class="ai-chips">
+                    <span class="chip">Machine Learning</span>
+                    <span class="chip">Data Science</span>
+                    <span class="chip">Neural Networks</span>
+                    <span class="chip">Python Programming</span>
+                    <span class="chip">Research Methodology</span>
+                    <span class="chip">Computational Thinking</span>
+                </div>
+            </div>
+            <div class="ai-visual">
+                <div class="ai-card">
+                    <div class="big-icon">🧠</div>
+                    <h4>Research-Led Teaching</h4>
+                    <p>Curriculum informed by cutting-edge PhD research in AI & ML.</p>
+                </div>
+                <div class="ai-card">
+                    <div class="big-icon">🏭</div>
+                    <h4>Industry-Informed</h4>
+                    <p>Real-world software engineering experience from Wipro Infotech.</p>
+                </div>
+                <div class="ai-card">
+                    <div class="big-icon">🏛️</div>
+                    <h4>University-Grade Insights</h4>
+                    <p>Pedagogy honed at Thapar & Chitkara Universities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer id="contact">
-        <h2>Come and be a part of The Meridian Academy</h2>
-        <p>District Kangra, Himachal Pradesh</p>
-        <div class="contact-box">+91-7018305080</div>
-        <p style="opacity: 0.6; font-size: 0.8rem; margin-top: 2rem;">&copy; 2026 The Meridian Academy. Professional Research & Teaching Excellence.</p>
+        <div class="footer-logo">The <span>Meridian</span> Academy</div>
+        <div class="footer-tagline">Professional Research & Teaching Excellence · Kangra, Himachal Pradesh</div>
+
+        <div class="contact-strip">
+            <div class="contact-item">
+                <div class="contact-icon">📞</div>
+                <div class="contact-text">
+                    <div class="contact-label">Call Us</div>
+                    <div class="contact-value">+91-7018305080</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">📍</div>
+                <div class="contact-text">
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">District Kangra, Himachal Pradesh</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">🎓</div>
+                <div class="contact-text">
+                    <div class="contact-label">Classes</div>
+                    <div class="contact-value">6th to 10+2</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="footer-bottom">© 2026 The Meridian Academy · All rights reserved · Inauguration Coming Soon</div>
     </footer>
 
+    <script>
+        // Scroll fade-in observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
